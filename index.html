@@ -66,6 +66,8 @@ tailwind.config = {
   .glow{ filter:blur(80px) }
   /* خلفيات مصوّرة من أصول دبّوس — التدرّج فوقها يضمن تباين النص */
   .photo-bg{ background-size:cover; background-position:center; background-repeat:no-repeat }
+  #hero-copy h1{ text-shadow:0 4px 26px rgba(23,17,99,.75) }
+  #hero-copy > .lede, #hero-copy p{ text-shadow:0 2px 14px rgba(23,17,99,.7) }
 
   /* ===== Preloader ===== */
   #preloader{ position:fixed; inset:0; z-index:300; background:#171163; display:grid; place-items:center }
@@ -143,9 +145,10 @@ tailwind.config = {
 
 <!-- ===== HERO ===== -->
 <section class="relative min-h-screen flex items-center pattern-bg overflow-hidden pt-32 pb-24 photo-bg"
-         style="background-image:linear-gradient(100deg, rgba(23,17,99,.96) 0%, rgba(23,17,99,.86) 45%, rgba(23,17,99,.55) 100%), url('https://dabboos.sa/wp-content/uploads/2026/07/website-banner-1-e1784839566608.png')">
+         style="background-image:linear-gradient(to left, rgba(23,17,99,.97) 0%, rgba(23,17,99,.92) 38%, rgba(23,17,99,.62) 70%, rgba(23,17,99,.45) 100%), url('https://dabboos.sa/wp-content/uploads/2026/07/website-banner-1-e1784839566608.png')">
   <div class="relative max-w-7xl mx-auto px-5 sm:px-8 w-full">
-    <div class="max-w-2xl" id="hero-copy">
+    <div class="max-w-2xl relative" id="hero-copy">
+      <div class="absolute -inset-x-6 -inset-y-8 sm:-inset-x-10 rounded-[2rem] bg-navy-950/45 backdrop-blur-[3px] -z-10" aria-hidden="true"></div>
       <span class="inline-flex items-center gap-2 text-flame font-bold text-sm tracking-widest mb-6">
         <span class="w-8 h-px bg-flame"></span> حي الزهراء · جدة
       </span>
