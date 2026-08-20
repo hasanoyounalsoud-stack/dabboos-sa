@@ -91,15 +91,13 @@ tailwind.config = {
 
   /* ===== Global cursor image follower ===== */
 
-  .menu-card{ transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, background-color .3s }
-  .menu-card:hover{ transform:translateY(-3px); border-color:rgba(245,130,31,.45); background-color:rgba(24,34,74,.55) }
-  /* لوح الصورة: سطح فاتح مقصود — صور المنتج بخلفية بيضاء تندمج فيه بدل ما تبان كمربع دخيل.
-     عند توفّر PNG شفاف فعلاً، بدّل التدرّج أدناه بـ transparent وارفع الحشوة. */
-  .menu-media{ background:radial-gradient(120% 92% at 50% 22%, #ffffff 0%, #f4f1ea 52%, #e4dfd5 100%) }
-  .menu-media--icon{ background:
-      radial-gradient(120% 92% at 50% 25%, rgba(245,130,31,.16), rgba(10,16,41,0) 70%), #0d1430 }
-  .cat-link.active{ background:rgba(245,130,31,.12); color:#F5821F; border-color:rgba(245,130,31,.45) }
-  .cat-pill.active{ background:#F5821F; color:#050B1F; border-color:#F5821F }
+    /* بطاقات المنيو تعتمد أدوات Tailwind للثيم الفاتح (shadow-sm → shadow-md) */
+  #cart-items::-webkit-scrollbar{ width:5px }
+  #cart-items::-webkit-scrollbar-thumb{ background:#d8d8d8; border-radius:9px }
+  .cat-link{ border-inline-start:3px solid transparent }
+  .cat-link.active{ background:#fff; color:#050B1F; font-weight:800; border-inline-start-color:#F5821F;
+    box-shadow:0 1px 3px rgba(0,0,0,.06) }
+  .cat-pill.active{ background:#F5821F; color:#fff; border-color:#F5821F }
   .no-scrollbar{ scrollbar-width:none; -ms-overflow-style:none }
   .no-scrollbar::-webkit-scrollbar{ display:none }
   .magnet, .float{ will-change:transform }
@@ -228,575 +226,503 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ===== MENU ===== -->
-<section id="menu" class="relative py-24 sm:py-32 bg-navy-900">
+<!-- ===== MENU (Light Theme) ===== -->
+<section id="menu" class="relative bg-gray-50 text-navy-950 py-20 sm:py-24">
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-2xl mb-10" data-reveal>
+    <div class="max-w-2xl mb-10">
       <span class="text-flame font-bold tracking-widest text-sm">المنيو</span>
-      <h2 class="font-display font-black text-[clamp(2rem,5vw,3.6rem)] leading-tight mt-3 mb-5">كل صنف بسعره — بدون PDF</h2>
-      <p class="text-white/60 text-lg leading-relaxed">منيو رقمي يفتح بثانية على جوالك، ويقدر قوقل يقراه ويعرضه لمن يدوّر على أكلك.</p>
+      <h2 class="font-display font-black text-navy-950 text-[clamp(2rem,5vw,3.4rem)] leading-tight mt-3 mb-4">كل صنف بسعره — بدون PDF</h2>
+      <p class="text-gray-600 text-lg leading-relaxed">منيو رقمي يفتح بثانية على جوالك، ويقدر قوقل يقراه ويعرضه لمن يدوّر على أكلك.</p>
     </div>
 
-    <!-- شريط الأقسام الأفقي — الجوال فقط -->
-    <div class="lg:hidden sticky top-[68px] z-40 -mx-5 px-5 py-3 bg-navy-900/95 backdrop-blur-lg border-y border-white/10 mb-8">
+    <!-- أقسام أفقية — الجوال فقط -->
+    <div class="lg:hidden sticky top-[68px] z-40 -mx-5 px-5 py-3 bg-white/90 backdrop-blur border-y border-gray-200 mb-8">
       <div class="flex gap-2.5 overflow-x-auto no-scrollbar" id="cat-pills">
-        <a href="#cat-burgers" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="burgers">البرجر</a>
-        <a href="#cat-crispy" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="crispy">وجبات المقرمش</a>
-        <a href="#cat-saj" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="saj">الصاج</a>
-        <a href="#cat-bowls" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="bowls">البولز</a>
-        <a href="#cat-shrimp" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="shrimp">الروبيان</a>
-        <a href="#cat-sides" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="sides">الأطباق الجانبية</a>
-        <a href="#cat-sauces" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="sauces">الصوصات</a>
-        <a href="#cat-sweets" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-white/20 text-white/60 transition" data-cat="sweets">الحلا والمشروبات</a>
+        <a href="#cat-burgers" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="burgers">البرجر</a>
+        <a href="#cat-crispy" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="crispy">وجبات المقرمش</a>
+        <a href="#cat-saj" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="saj">الصاج</a>
+        <a href="#cat-bowls" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="bowls">البولز</a>
+        <a href="#cat-shrimp" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="shrimp">الروبيان</a>
+        <a href="#cat-sides" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="sides">الأطباق الجانبية</a>
+        <a href="#cat-sauces" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="sauces">الصوصات</a>
+        <a href="#cat-sweets" class="cat-pill flex-shrink-0 px-5 py-2 rounded-full text-sm font-bold border border-gray-300 text-gray-600 bg-white transition" data-cat="sweets">الحلا والمشروبات</a>
       </div>
     </div>
 
     <div class="grid lg:grid-cols-[250px_1fr_300px] gap-8 relative items-start">
 
-      <!-- العمود ١: أقسام ثابتة -->
+      <!-- العمود ١ -->
       <aside class="hidden lg:block sticky top-32">
-        <h3 class="text-white/40 text-xs font-bold tracking-widest mb-3 px-4">الأقسام</h3>
+        <h3 class="text-gray-400 text-xs font-bold tracking-widest mb-3 px-4">الأقسام</h3>
         <nav aria-label="أقسام المنيو">
-          <ul class="space-y-1" id="cat-nav">
-          <li><a href="#cat-burgers" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="burgers">البرجر</a></li>
-          <li><a href="#cat-crispy" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="crispy">وجبات المقرمش</a></li>
-          <li><a href="#cat-saj" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="saj">الصاج</a></li>
-          <li><a href="#cat-bowls" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="bowls">البولز</a></li>
-          <li><a href="#cat-shrimp" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="shrimp">الروبيان</a></li>
-          <li><a href="#cat-sides" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="sides">الأطباق الجانبية</a></li>
-          <li><a href="#cat-sauces" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="sauces">الصوصات</a></li>
-          <li><a href="#cat-sweets" class="cat-link block px-4 py-2.5 rounded-xl text-sm font-bold text-white/55 border border-transparent hover:text-white hover:bg-white/5 transition" data-cat="sweets">الحلا والمشروبات</a></li>
+          <ul class="space-y-0.5" id="cat-nav">
+          <li><a href="#cat-burgers" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="burgers">البرجر</a></li>
+          <li><a href="#cat-crispy" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="crispy">وجبات المقرمش</a></li>
+          <li><a href="#cat-saj" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="saj">الصاج</a></li>
+          <li><a href="#cat-bowls" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="bowls">البولز</a></li>
+          <li><a href="#cat-shrimp" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="shrimp">الروبيان</a></li>
+          <li><a href="#cat-sides" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="sides">الأطباق الجانبية</a></li>
+          <li><a href="#cat-sauces" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="sauces">الصوصات</a></li>
+          <li><a href="#cat-sweets" class="cat-link block px-4 py-2.5 rounded-lg text-sm font-semibold text-gray-500 hover:bg-gray-100 hover:text-navy-950 transition" data-cat="sweets">الحلا والمشروبات</a></li>
           </ul>
         </nav>
       </aside>
 
-      <!-- العمود ٢: الأصناف -->
+      <!-- العمود ٢ -->
       <div id="menu-feed">
-      <h2 id="cat-burgers" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">البرجر</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="burgers">
+      <h2 id="cat-burgers" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">البرجر</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="burgers">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">برجر الهريسة بالتمر</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">وجبة كاملة · صوص التوقيع الحلو-الحار</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">23.50 ﷼</span>
-            <button data-price="23.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">برجر الهريسة بالتمر</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">وجبة كاملة · صوص التوقيع الحلو-الحار</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">23.50 ﷼</div>
+          <button data-price="23.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/6-660x740.png" alt="برجر دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="burgers">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="burgers">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">برجر دجاج</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">13.00 / 21.50 ﷼</span>
-            <button data-price="13.00" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">برجر دجاج</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">13.00 / 21.50 ﷼</div>
+          <button data-price="13.00" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/6-660x740.png" alt="برجر دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="burgers">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="burgers">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">برجر دجاج حار</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">14.00 / 22.50 ﷼</span>
-            <button data-price="14.00" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">برجر دجاج حار</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">14.00 / 22.50 ﷼</div>
+          <button data-price="14.00" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/6-660x740.png" alt="برجر دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="burgers">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="burgers">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">كلوب ساندوتش بوفلو</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">إصدار محدود · +٦ ﷼ للتحويل لوجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">28.50 ﷼</span>
-            <button data-price="28.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">كلوب ساندوتش بوفلو</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">إصدار محدود · +٦ ﷼ للتحويل لوجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">28.50 ﷼</div>
+          <button data-price="28.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/6-660x740.png" alt="برجر دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="burgers">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="burgers">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">كلوب ساندوتش كلاسيك</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">إصدار محدود · +٦ ﷼ للتحويل لوجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">24.50 ﷼</span>
-            <button data-price="24.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">كلوب ساندوتش كلاسيك</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">إصدار محدود · +٦ ﷼ للتحويل لوجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">24.50 ﷼</div>
+          <button data-price="24.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/6-660x740.png" alt="برجر دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <h2 id="cat-crispy" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">وجبات المقرمش</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="crispy">
+      <h2 id="cat-crispy" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">وجبات المقرمش</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="crispy">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">تندر ميل — ٣ قطع</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">18.50 ﷼</span>
-            <button data-price="18.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">تندر ميل — ٣ قطع</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">18.50 ﷼</div>
+          <button data-price="18.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/4-660x740.png" alt="دجاج مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="crispy">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="crispy">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">تندر ميل — ٤ قطع</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار · مع بطاطس ومشروب</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">23.50 ﷼</span>
-            <button data-price="23.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">تندر ميل — ٤ قطع</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار · مع بطاطس ومشروب</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">23.50 ﷼</div>
+          <button data-price="23.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/4-660x740.png" alt="دجاج مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="crispy">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="crispy">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">تندر ميل — ٥ قطع</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">28.50 ﷼</span>
-            <button data-price="28.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">تندر ميل — ٥ قطع</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">عادي أو حار</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">28.50 ﷼</div>
+          <button data-price="28.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/4-660x740.png" alt="دجاج مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="crispy">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="crispy">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">بايتس ميل — ١٠ قطع</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">قطع صغيرة مقرمشة للمشاركة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">17.50 ﷼</span>
-            <button data-price="17.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">بايتس ميل — ١٠ قطع</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">قطع صغيرة مقرمشة للمشاركة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">17.50 ﷼</div>
+          <button data-price="17.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/4-660x740.png" alt="دجاج مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="crispy">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="crispy">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">وجبة أطفال — ميني بايتس</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">حصة مناسبة للصغار</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">15.50 ﷼</span>
-            <button data-price="15.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">وجبة أطفال — ميني بايتس</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">حصة مناسبة للصغار</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">15.50 ﷼</div>
+          <button data-price="15.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2026/01/7-660x740.png" alt="علبة وجبة أطفال من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <h2 id="cat-saj" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">الصاج</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="saj">
+      <h2 id="cat-saj" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">الصاج</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="saj">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">صاج روبيان مقرمش</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة · خبز صاج طازج</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">14.50 / 20.50 ﷼</span>
-            <button data-price="14.50" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">صاج روبيان مقرمش</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة · خبز صاج طازج</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">14.50 / 20.50 ﷼</div>
+          <button data-price="14.50" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/5-660x740.png" alt="صاج دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="saj">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="saj">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">صاج مشوي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">9.50 / 17.50 ﷼</span>
-            <button data-price="9.50" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">صاج مشوي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">9.50 / 17.50 ﷼</div>
+          <button data-price="9.50" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/5-660x740.png" alt="صاج دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="saj">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="saj">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">صاج مقرمش</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">9.50 / 17.50 ﷼</span>
-            <button data-price="9.50" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">صاج مقرمش</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">ساندوتش / وجبة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">9.50 / 17.50 ﷼</div>
+          <button data-price="9.50" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/5-660x740.png" alt="صاج دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <h2 id="cat-bowls" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">البولز</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="bowls">
+      <h2 id="cat-bowls" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">البولز</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="bowls">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">أرز أحمر مشوي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">بولة أرز مع دجاج مشوي</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">20.00 ﷼</span>
-            <button data-price="20.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">أرز أحمر مشوي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">بولة أرز مع دجاج مشوي</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">20.00 ﷼</div>
+          <button data-price="20.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2026/07/13-660x740.png" alt="بولة أرز من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="bowls">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="bowls">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">ريد ماكارونة مشوي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">مكرونة بصلصة حمراء مع مشوي</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">15.00 ﷼</span>
-            <button data-price="15.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">ريد ماكارونة مشوي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">مكرونة بصلصة حمراء مع مشوي</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">15.00 ﷼</div>
+          <button data-price="15.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2026/07/13-660x740.png" alt="بولة أرز من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="bowls">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="bowls">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">أرز مشوي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">بولة أرز كلاسيكية</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">15.00 ﷼</span>
-            <button data-price="15.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">أرز مشوي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">بولة أرز كلاسيكية</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">15.00 ﷼</div>
+          <button data-price="15.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2026/07/13-660x740.png" alt="بولة أرز من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <h2 id="cat-shrimp" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">الروبيان</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="shrimp">
+      <h2 id="cat-shrimp" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">الروبيان</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="shrimp">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">روبيان تشيلي لايم</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">١٠ قطع · الصنف الجديد</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">30.00 ﷼</span>
-            <button data-price="30.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">روبيان تشيلي لايم</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">١٠ قطع · الصنف الجديد</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">30.00 ﷼</div>
+          <button data-price="30.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/5-660x740.png" alt="روبيان مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="shrimp">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="shrimp">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">وجبة روبيان دبّوس الكبير</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">١٠ قطع مقرمشة</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">27.00 ﷼</span>
-            <button data-price="27.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">وجبة روبيان دبّوس الكبير</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">١٠ قطع مقرمشة</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">27.00 ﷼</div>
+          <button data-price="27.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden">
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg">
           <img src="https://dabboos.sa/wp-content/uploads/2022/09/5-660x740.png" alt="روبيان مقرمش من دبّوس" width="660" height="740" loading="lazy" decoding="async"
-               class="object-contain h-full w-full p-2 transition-transform duration-700 ease-out group-hover:scale-110">
+               class="object-contain h-full w-full transition-transform duration-500 ease-out group-hover:scale-110">
         </div>
       </article>
-      <h2 id="cat-sides" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">الأطباق الجانبية</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <h2 id="cat-sides" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">الأطباق الجانبية</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">بطاطس</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">عادي / حراق</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">6.50 / 8.50 ﷼</span>
-            <button data-price="6.50" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">بطاطس</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">عادي / حراق</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">6.50 / 8.50 ﷼</div>
+          <button data-price="6.50" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">ذرة مقرمشة</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">عادي / حراق</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">8.00 / 10.00 ﷼</span>
-            <button data-price="8.00" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">ذرة مقرمشة</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">عادي / حراق</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">8.00 / 10.00 ﷼</div>
+          <button data-price="8.00" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">كول سلو</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">سلطة ملفوف كريمية</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">5.50 ﷼</span>
-            <button data-price="5.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">كول سلو</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">سلطة ملفوف كريمية</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">5.50 ﷼</div>
+          <button data-price="5.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">أرز جانبي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">حصة جانبية</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">6.50 ﷼</span>
-            <button data-price="6.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">أرز جانبي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">حصة جانبية</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">6.50 ﷼</div>
+          <button data-price="6.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">خبز الصاج</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">طازج يومياً</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">1.50 ﷼</span>
-            <button data-price="1.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">خبز الصاج</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">طازج يومياً</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">1.50 ﷼</div>
+          <button data-price="1.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sides">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sides">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">خبز البرجر</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">بريوش طازج</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">1.50 ﷼</span>
-            <button data-price="1.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">خبز البرجر</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">بريوش طازج</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">1.50 ﷼</div>
+          <button data-price="1.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🍟</span>
         </div>
       </article>
-      <h2 id="cat-sauces" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">الصوصات</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <h2 id="cat-sauces" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">الصوصات</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">هريسة التمر</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">صوص التوقيع</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">2.50 ﷼</span>
-            <button data-price="2.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">هريسة التمر</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">صوص التوقيع</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">2.50 ﷼</div>
+          <button data-price="2.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">دقوس لبن</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">الأكثر طلباً</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">2.50 ﷼</span>
-            <button data-price="2.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">دقوس لبن</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">الأكثر طلباً</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">2.50 ﷼</div>
+          <button data-price="2.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">الحارة</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">حدة حقيقية</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">2.50 ﷼</span>
-            <button data-price="2.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">الحارة</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">حدة حقيقية</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">2.50 ﷼</div>
+          <button data-price="2.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">صوص الجبن</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">صغير / ١٥٠ جرام</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">3.50 / 7.00 ﷼</span>
-            <button data-price="3.50" data-multi="true" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">صوص الجبن</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">صغير / ١٥٠ جرام</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">3.50 / 7.00 ﷼</div>
+          <button data-price="3.50" data-multi="true" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">ثوم</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">كريمي وقوي</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">2.50 ﷼</span>
-            <button data-price="2.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">ثوم</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">كريمي وقوي</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">2.50 ﷼</div>
+          <button data-price="2.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sauces">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sauces">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">OG Sauce</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">الوصفة الأصلية</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">2.50 ﷼</span>
-            <button data-price="2.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">OG Sauce</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">الوصفة الأصلية</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">2.50 ﷼</div>
+          <button data-price="2.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥣</span>
         </div>
       </article>
-      <h2 id="cat-sweets" class="cat-head font-display text-2xl font-black mb-4 mt-10 first:mt-0 scroll-mt-40">الحلا والمشروبات</h2>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <h2 id="cat-sweets" class="cat-head font-display text-2xl font-black text-navy-950 mb-6 mt-12 first:mt-0 border-b border-gray-200 pb-2 scroll-mt-40">الحلا والمشروبات</h2>
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">شوكولاتة مقرمشة</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">حلا التوقيع</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">7.50 ﷼</span>
-            <button data-price="7.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">شوكولاتة مقرمشة</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">حلا التوقيع</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">7.50 ﷼</div>
+          <button data-price="7.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">مهلبية</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">حلا عربي كلاسيكي</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">5.50 ﷼</span>
-            <button data-price="5.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">مهلبية</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">حلا عربي كلاسيكي</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">5.50 ﷼</div>
+          <button data-price="5.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">كينزا شامبانيا سعودي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">مشروب غازي</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">5.00 ﷼</span>
-            <button data-price="5.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">كينزا شامبانيا سعودي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">مشروب غازي</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">5.00 ﷼</div>
+          <button data-price="5.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">عصير تفاح عضوي</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">طبيعي ١٠٠٪</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">4.50 ﷼</span>
-            <button data-price="4.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">عصير تفاح عضوي</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">طبيعي ١٠٠٪</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">4.50 ﷼</div>
+          <button data-price="4.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">مشروبات كينزا الغازية</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">كولا · دايت · ليمون · زيرو · حمضيات · برتقال</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">3.00 ﷼</span>
-            <button data-price="3.00" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">مشروبات كينزا الغازية</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">كولا · دايت · ليمون · زيرو · حمضيات · برتقال</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">3.00 ﷼</div>
+          <button data-price="3.00" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
-      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-navy-800/40 border border-white/10 rounded-2xl p-4 mb-4" data-cat="sweets">
+      <article class="menu-card group flex flex-row justify-between items-center gap-4 bg-white border border-gray-100 rounded-xl p-4 sm:p-5 mb-4 shadow-sm hover:shadow-md transition" data-cat="sweets">
         <div class="flex-1 min-w-0">
-          <h3 class="font-display font-bold text-base sm:text-lg leading-snug mb-1">مياه</h3>
-          <p class="text-white/50 text-xs sm:text-sm leading-relaxed mb-3">٢٠٠ مل / ٥٥٠ مل</p>
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-flame font-display font-black text-sm sm:text-base whitespace-nowrap">1.50 ﷼</span>
-            <button data-price="1.50" data-multi="false" class="add-btn border border-white/20 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame transition">+ أضف</button>
-          </div>
+          <h3 class="font-display font-bold text-base sm:text-lg text-navy-950 leading-snug mb-1">مياه</h3>
+          <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-3">٢٠٠ مل / ٥٥٠ مل</p>
+          <div class="font-display font-black text-flame text-base sm:text-lg mb-3" dir="ltr">1.50 ﷼</div>
+          <button data-price="1.50" data-multi="false" class="add-btn border border-gray-300 text-navy-950 px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold hover:border-flame hover:text-flame hover:bg-flame/5 transition">+ أضف</button>
         </div>
-        <div class="menu-media menu-media--icon w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-xl flex-shrink-0 relative overflow-hidden grid place-items-center">
-          <span class="text-3xl sm:text-4xl transition-transform duration-700 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
+        <div class="w-20 h-20 sm:w-28 sm:h-28 flex-shrink-0 relative overflow-hidden bg-white rounded-lg bg-gray-50 grid place-items-center">
+          <span class="text-3xl sm:text-4xl opacity-70 transition-transform duration-500 ease-out group-hover:scale-110" aria-hidden="true">🥤</span>
         </div>
       </article>
       </div>
 
-      <!-- العمود ٣: السلة الثابتة -->
+      <!-- العمود ٣ -->
       <aside class="hidden lg:block sticky top-32">
-        <div id="cart-panel" class="bg-navy-800/40 border border-white/10 rounded-2xl p-6 min-h-[300px] flex flex-col">
+        <div id="cart-panel" class="bg-white border border-gray-100 rounded-xl p-6 min-h-[300px] shadow-sm flex flex-col">
           <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center text-center gap-3">
             <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"
-                 stroke-linecap="round" stroke-linejoin="round" class="text-white/25" aria-hidden="true">
+                 stroke-linecap="round" stroke-linejoin="round" class="text-gray-300" aria-hidden="true">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/>
             </svg>
-            <p class="font-display font-bold text-lg">سلة المشتريات فارغة</p>
-            <p class="text-white/45 text-sm">أضف عناصر لسلتك</p>
+            <p class="font-display font-bold text-lg text-navy-950">سلة المشتريات فارغة</p>
+            <p class="text-gray-400 text-sm">أضف عناصر لسلتك</p>
           </div>
           <div id="cart-filled" class="hidden flex-1 flex-col">
-            <h3 class="font-display font-black text-lg mb-4 flex items-center justify-between">
+            <h3 class="font-display font-black text-lg text-navy-950 mb-4 flex items-center justify-between">
               <span>سلتك</span>
               <span id="cart-total" class="text-flame text-sm">0 عنصر</span>
             </h3>
             <ul id="cart-items" class="space-y-2.5 mb-4 max-h-56 overflow-y-auto text-sm"></ul>
-            <div class="mt-auto pt-4 border-t border-white/10">
+            <div class="mt-auto pt-4 border-t border-gray-200">
               <div class="flex items-baseline justify-between mb-1">
-                <span class="font-display font-bold text-white/70">الإجمالي</span>
+                <span class="font-display font-bold text-gray-600">الإجمالي</span>
                 <span id="cart-sum" class="font-display font-black text-2xl text-flame" dir="ltr">0.00 ﷼</span>
               </div>
-              <p id="cart-note" class="hidden text-white/35 text-[11px] leading-relaxed mb-3">
+              <p id="cart-note" class="hidden text-gray-400 text-[11px] leading-relaxed">
                 الإجمالي محسوب على الخيار الأساسي للأصناف متعددة الأحجام. الأسعار النهائية تُعتمد عند الطلب.
               </p>
               <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener"
-                 class="block text-center bg-flame text-navy-950 py-3 rounded-xl font-display font-black mt-3">أكمل الطلب</a>
+                 class="block text-center bg-flame text-white py-3 rounded-xl font-display font-black mt-3 hover:bg-flame-dark transition">أكمل الطلب</a>
+              <button id="cart-clear" class="w-full mt-2 text-gray-400 text-xs hover:text-navy-950 transition">تفريغ السلة</button>
             </div>
-            <button id="cart-clear" class="mt-2 text-white/40 text-xs hover:text-white transition">تفريغ السلة</button>
           </div>
         </div>
       </aside>
