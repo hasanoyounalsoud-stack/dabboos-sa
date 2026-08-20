@@ -728,8 +728,11 @@ tailwind.config = {
               <p id="cart-note" class="hidden text-gray-400 text-[11px] leading-relaxed">
                 الإجمالي محسوب على الخيار الأساسي للأصناف متعددة الأحجام. الأسعار النهائية تُعتمد عند الطلب.
               </p>
-              <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener"
-                 class="block text-center bg-flame text-white py-3 rounded-xl font-display font-black mt-3 hover:bg-flame-dark transition">أكمل الطلب</a>
+              <button type="button" data-checkout
+                 class="w-full text-center bg-flame text-white py-3 rounded-xl font-display font-black mt-3 hover:bg-flame-dark transition">
+                 أكمل الطلب عبر واتساب</button>
+              <a href="https://dabboos.tryorder.net/ar/menu" target="_blank" rel="noopener"
+                 class="block text-center text-gray-500 text-xs mt-2 hover:text-navy-950 underline underline-offset-4 transition">أو اطلب عبر تطبيق دبّوس</a>
               <button id="cart-clear" class="w-full mt-2 text-gray-400 text-xs hover:text-navy-950 transition">تفريغ السلة</button>
             </div>
           </div>
@@ -815,16 +818,46 @@ tailwind.config = {
   </div>
 </footer>
 
+
+<!-- سلة الجوال -->
+<div id="cart-sheet" class="md:hidden fixed inset-0 z-[120] hidden" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="absolute inset-0 bg-black/60" data-sheet-close></div>
+  <div class="absolute inset-x-0 bottom-0 bg-white text-navy-950 rounded-t-3xl max-h-[78vh] flex flex-col">
+    <div class="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-200">
+      <h2 id="sheet-title" class="font-display font-black text-lg">سلتك</h2>
+      <button type="button" data-sheet-close aria-label="إغلاق"
+              class="w-9 h-9 grid place-items-center rounded-full bg-gray-100 text-gray-600">✕</button>
+    </div>
+    <div class="flex-1 overflow-y-auto px-5 py-4">
+      <p id="sheet-empty" class="text-center text-gray-400 py-10">سلة المشتريات فارغة</p>
+      <ul id="cart-items-m" class="space-y-3 text-sm"></ul>
+    </div>
+    <div class="px-5 pt-4 pb-6 border-t border-gray-200">
+      <div class="flex items-baseline justify-between mb-1">
+        <span class="font-display font-bold text-gray-600">الإجمالي</span>
+        <span id="cart-sum-m" class="font-display font-black text-2xl text-flame" dir="ltr">0.00 ﷼</span>
+      </div>
+      <p id="cart-note-m" class="hidden text-gray-400 text-[11px] leading-relaxed mb-1">
+        الإجمالي محسوب على الخيار الأساسي للأصناف متعددة الأحجام. الأسعار النهائية تُعتمد عند الطلب.
+      </p>
+      <button type="button" data-checkout
+              class="w-full bg-flame text-white py-3.5 rounded-xl font-display font-black mt-2">أكمل الطلب عبر واتساب</button>
+      <a href="https://dabboos.tryorder.net/ar/menu" target="_blank" rel="noopener"
+         class="block text-center text-gray-500 text-xs mt-3 underline underline-offset-4">أو اطلب عبر تطبيق دبّوس</a>
+    </div>
+  </div>
+</div>
+
 <nav class="md:hidden fixed bottom-0 inset-x-0 z-[100] bg-navy-900/90 backdrop-blur-lg border-t border-white/10" aria-label="تنقل سريع">
   <div class="grid grid-cols-4">
     <a href="#top" class="flex flex-col items-center gap-1 py-3 text-white/60"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg><span class="text-[11px] font-semibold">الرئيسية</span></a>
     <a href="#menu" class="flex flex-col items-center gap-1 py-3 text-white/60"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span class="text-[11px] font-semibold">المنيو</span></a>
     <a href="#branch" class="flex flex-col items-center gap-1 py-3 text-white/60"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="text-[11px] font-semibold">الفرع</span></a>
-    <span id="cart-mobile" class="relative flex flex-col items-center gap-1 py-3 text-flame">
+    <button type="button" id="cart-mobile" class="relative flex flex-col items-center gap-1 py-3 text-flame w-full">
       <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
       <span class="text-[11px] font-semibold">السلة</span>
-      <span class="cart-badge hidden absolute top-1.5 end-[26%] bg-flame text-navy-950 text-[10px] font-black rounded-full min-w-[17px] h-[17px] grid place-items-center px-1">0</span>
-    </span>
+      <span class="cart-badge hidden absolute top-1.5 end-[26%] bg-flame text-white text-[10px] font-black rounded-full min-w-[17px] h-[17px] grid place-items-center px-1">0</span>
+    </button>
   </div>
 </nav>
 
@@ -1025,62 +1058,155 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ===== 11) CART STATE ===== */
+  var WA='966550238787';
   var cart={}, cartOrder=[];   // cart[name] = { qty, price, multi }
+
   var elEmpty =document.getElementById('cart-empty'),
       elFilled=document.getElementById('cart-filled'),
-      elItems =document.getElementById('cart-items'),
       elTotal =document.getElementById('cart-total'),
-      elSum   =document.getElementById('cart-sum'),
-      elNote  =document.getElementById('cart-note'),
-      elClear =document.getElementById('cart-clear');
+      elClear =document.getElementById('cart-clear'),
+      sheet   =document.getElementById('cart-sheet'),
+      sheetEmpty=document.getElementById('sheet-empty');
+
+  var lists=[document.getElementById('cart-items'), document.getElementById('cart-items-m')];
+  var sums =[document.getElementById('cart-sum'),   document.getElementById('cart-sum-m')];
+  var notes=[document.getElementById('cart-note'),  document.getElementById('cart-note-m')];
 
   function money(n){ return n.toFixed(2)+' ﷼'; }
+
+  function save(){
+    try{ localStorage.setItem('dabboos_cart', JSON.stringify({c:cart,o:cartOrder})); }catch(e){}
+  }
+  function load(){
+    try{
+      var raw=localStorage.getItem('dabboos_cart'); if(!raw) return;
+      var d=JSON.parse(raw);
+      if(d && d.c && d.o){ cart=d.c; cartOrder=d.o.filter(function(k){ return cart[k]; }); }
+    }catch(e){}
+  }
+
+  function line(name){
+    var it=cart[name];
+    var li=document.createElement('li');
+    li.className='flex justify-between items-center gap-3 text-gray-700';
+
+    var nm=document.createElement('span');
+    nm.className='truncate flex-1'; nm.textContent=name;
+
+    var right=document.createElement('span');
+    right.className='flex items-center gap-2 flex-shrink-0';
+
+    var minus=document.createElement('button');
+    minus.type='button';
+    minus.className='w-6 h-6 rounded-md border border-gray-300 text-gray-500 leading-none hover:border-flame hover:text-flame transition';
+    minus.setAttribute('aria-label','إنقاص '+name);
+    minus.textContent='−';
+    minus.addEventListener('click',function(){ removeOne(name); });
+
+    var qt=document.createElement('span');
+    qt.className='text-gray-400 text-xs w-6 text-center'; qt.textContent='×'+it.qty;
+
+    var pr=document.createElement('span');
+    pr.className='text-flame font-bold w-20 text-end'; pr.setAttribute('dir','ltr');
+    pr.textContent=money(it.qty*it.price);
+
+    right.appendChild(minus); right.appendChild(qt); right.appendChild(pr);
+    li.appendChild(nm); li.appendChild(right);
+    return li;
+  }
 
   function renderCart(){
     var n=0, sum=0, anyMulti=false;
     cartOrder.forEach(function(k){
-      var it=cart[k];
-      n   += it.qty;
-      sum += it.qty*it.price;
-      if(it.multi) anyMulti=true;
+      var it=cart[k]; n+=it.qty; sum+=it.qty*it.price; if(it.multi) anyMulti=true;
     });
-    badges.forEach(function(b){ b.textContent=n; b.classList.toggle('hidden', n===0); });
-    if(!elEmpty||!elFilled) return;
     var has=n>0;
-    elEmpty.classList.toggle('hidden',has);
-    elFilled.classList.toggle('hidden',!has);
-    elFilled.classList.toggle('flex',has);
-    if(elTotal) elTotal.textContent=n+' عنصر';
-    if(elSum)   elSum.textContent=money(sum);
-    if(elNote)  elNote.classList.toggle('hidden', !anyMulti);
-    if(elItems){
-      elItems.innerHTML='';
-      cartOrder.forEach(function(k){
-        var it=cart[k];
-        var li=document.createElement('li');
-        li.className='flex justify-between items-baseline gap-3 text-white/70';
 
-        var nm=document.createElement('span');
-        nm.className='truncate';
-        nm.textContent=k;
+    badges.forEach(function(b){ b.textContent=n; b.classList.toggle('hidden', !has); });
 
-        var right=document.createElement('span');
-        right.className='flex items-baseline gap-2 flex-shrink-0';
+    if(elEmpty)  elEmpty.classList.toggle('hidden', has);
+    if(elFilled){ elFilled.classList.toggle('hidden', !has); elFilled.classList.toggle('flex', has); }
+    if(elTotal)  elTotal.textContent=n+' عنصر';
+    if(sheetEmpty) sheetEmpty.classList.toggle('hidden', has);
 
-        var qt=document.createElement('span');
-        qt.className='text-white/40 text-xs'; qt.textContent='×'+it.qty;
+    sums.forEach(function(el){ if(el) el.textContent=money(sum); });
+    notes.forEach(function(el){ if(el) el.classList.toggle('hidden', !anyMulti); });
 
-        var pr=document.createElement('span');
-        pr.className='text-flame font-bold'; pr.setAttribute('dir','ltr');
-        pr.textContent=money(it.qty*it.price);
-
-        right.appendChild(qt); right.appendChild(pr);
-        li.appendChild(nm); li.appendChild(right);
-        elItems.appendChild(li);
-      });
-    }
+    lists.forEach(function(ul){
+      if(!ul) return;
+      ul.innerHTML='';
+      cartOrder.forEach(function(k){ ul.appendChild(line(k)); });
+    });
+    save();
   }
+
+  function removeOne(name){
+    if(!cart[name]) return;
+    cart[name].qty--;
+    if(cart[name].qty<=0){
+      delete cart[name];
+      cartOrder=cartOrder.filter(function(k){ return k!==name; });
+    }
+    renderCart();
+  }
+
   if(elClear) elClear.addEventListener('click',function(){ cart={}; cartOrder=[]; renderCart(); });
+
+  /* ===== 12) MOBILE CART SHEET ===== */
+  function openSheet(){ if(sheet){ sheet.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+  function closeSheet(){ if(sheet){ sheet.classList.add('hidden'); document.body.style.overflow=''; } }
+  var mobBtn=document.getElementById('cart-mobile');
+  if(mobBtn) mobBtn.addEventListener('click',openSheet);
+  if(sheet){
+    sheet.querySelectorAll('[data-sheet-close]').forEach(function(el){ el.addEventListener('click',closeSheet); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeSheet(); });
+  }
+
+  /* ==================================================================
+     13) CHECKOUT — طبقة مزوّد قابلة للاستبدال
+     الهدف النهائي: ربط الموقع بـFoodics API مباشرة + بوابة دفع،
+     ليستغني المطعم عن TryOrder وعمولته. الواجهة لا تتغيّر عند التبديل —
+     فقط CHECKOUT.provider والدالة المقابلة.
+
+     خطوات التبديل لاحقًا:
+     1. املأ FOODICS_SKU: اسم الصنف كما هو في البطاقة → معرّف المنتج في Foodics.
+     2. اكتب providers.foodics ليبني الطلب ويرسله لنقطة نهاية خلفية آمنة
+        (مفتاح Foodics لا يوضع في كود العميل أبدًا — يمر عبر خادم وسيط).
+     3. غيّر CHECKOUT.provider إلى 'foodics'.
+     ================================================================== */
+  var FOODICS_SKU = {};          // { 'برجر دجاج': 'prod_xxx', ... }
+  var CHECKOUT = { provider:'whatsapp' };
+
+  function orderPayload(){
+    var sum=0;
+    var items=cartOrder.map(function(k){
+      var it=cart[k]; sum+=it.qty*it.price;
+      return { name:k, sku:FOODICS_SKU[k]||null, qty:it.qty, unit:it.price,
+               total:it.qty*it.price, needsSizeChoice:!!it.multi };
+    });
+    return { items:items, total:sum, currency:'SAR',
+             hasVariablePricing: items.some(function(i){ return i.needsSizeChoice; }) };
+  }
+
+  var providers = {
+    whatsapp: function(order){
+      var lines=order.items.map(function(i){ return '• '+i.name+' ×'+i.qty+' — '+money(i.total); });
+      var msg='طلب جديد من موقع دبّوس\n\n'+lines.join('\n')+'\n\nالإجمالي: '+money(order.total);
+      if(order.hasVariablePricing)
+        msg+='\n\n(بعض الأصناف لها أحجام متعددة — الأسعار محسوبة على الخيار الأساسي، يرجى تأكيد الحجم)';
+      window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank','noopener');
+    }
+    // foodics: function(order){ ... POST إلى الخادم الوسيط ثم تحويل لبوابة الدفع ... }
+  };
+
+  function checkout(){
+    if(!cartOrder.length) return;
+    var fn=providers[CHECKOUT.provider];
+    if(typeof fn==='function') fn(orderPayload());
+  }
+  document.querySelectorAll('[data-checkout]').forEach(function(b){ b.addEventListener('click',checkout); });
+
+  load(); renderCart();
 });
 </script>
 </body>
