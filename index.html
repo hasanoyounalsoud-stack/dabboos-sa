@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>دبّوس | Dabboos — مقرمش غربي بنكهة عربية أصيلة، حي الزهراء جدة</title>
 <meta name="description" content="دبّوس — دجاج مقرمش ومشوي، برجر، وصاج بصوصات عربية أصيلة: هريسة التمر، دقوس اللبن، والحارة. حي الزهراء، جدة. اطلب الآن مباشرة.">
-<meta name="theme-color" content="#050B1F">
+<meta name="theme-color" content="#171163">
 <meta property="og:title" content="دبّوس | Dabboos">
 <meta property="og:description" content="مقرمش غربي، بنكهة عربية أصيلة — حي الزهراء، جدة">
-<meta property="og:image" content="https://dabboos.sa/wp-content/uploads/2026/07/13-660x740.png">
+<meta property="og:image" content="https://dabboos.sa/wp-content/uploads/2026/07/website-banner-1-e1784839566608.png">
 <meta property="og:type" content="restaurant.menu">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
 tailwind.config = {
   theme: { extend: {
     colors: {
-      navy: { 950:'#050B1F', 900:'#0A1029', 800:'#101838', 700:'#18224A', 600:'#22305F' },
+      navy: { 950:'#171163', 900:'#1E1880', 800:'#2A22A0', 700:'#3A31BE', 600:'#4C42D6' },
       flame:{ DEFAULT:'#F5821F', light:'#FF9E44', dark:'#D96A0C' },
       sky:  { DEFAULT:'#5BC8F2' }
     },
@@ -55,8 +55,8 @@ tailwind.config = {
 
 <style>
   *{ -webkit-tap-highlight-color:transparent }
-  body{ background:#050B1F; color:#fff; font-family:'IBM Plex Sans Arabic',Tajawal,system-ui,sans-serif; overflow-x:hidden }
-  ::selection{ background:#F5821F; color:#050B1F }
+  body{ background:#171163; color:#fff; font-family:'IBM Plex Sans Arabic',Tajawal,system-ui,sans-serif; overflow-x:hidden }
+  ::selection{ background:#F5821F; color:#171163 }
 
   .pattern-bg::before{
     content:''; position:absolute; inset:0; pointer-events:none; opacity:.055;
@@ -64,9 +64,11 @@ tailwind.config = {
     background-size:44px 44px;
   }
   .glow{ filter:blur(80px) }
+  /* خلفيات مصوّرة من أصول دبّوس — التدرّج فوقها يضمن تباين النص */
+  .photo-bg{ background-size:cover; background-position:center; background-repeat:no-repeat }
 
   /* ===== Preloader ===== */
-  #preloader{ position:fixed; inset:0; z-index:300; background:#050B1F; display:grid; place-items:center }
+  #preloader{ position:fixed; inset:0; z-index:300; background:#171163; display:grid; place-items:center }
   #pre-word{ font-family:Tajawal,sans-serif; font-weight:900; color:#F5821F; font-size:clamp(3rem,12vw,8rem) }
   #pre-caret{ display:inline-block; width:.06em; height:.9em; background:#5BC8F2; margin-inline-start:.08em;
     vertical-align:-.08em; animation:blink .7s steps(1) infinite }
@@ -96,9 +98,9 @@ tailwind.config = {
   #cart-items::-webkit-scrollbar{ width:5px }
   #cart-items::-webkit-scrollbar-thumb{ background:#d8d8d8; border-radius:9px }
   .cat-link{ border-inline-start:3px solid transparent }
-  .cat-link.active{ background:#fff; color:#050B1F; font-weight:800; border-inline-start-color:#F5821F;
+  .cat-link.active{ background:#fff; color:#171163; font-weight:800; border-inline-start-color:#F5821F;
     box-shadow:0 1px 3px rgba(0,0,0,.06) }
-  .cat-pill.active{ background:#F5821F; color:#fff; border-color:#F5821F }
+  .cat-pill.active{ background:#F5821F; color:#171163; border-color:#F5821F }
   .no-scrollbar{ scrollbar-width:none; -ms-overflow-style:none }
   .no-scrollbar::-webkit-scrollbar{ display:none }
   .magnet, .float{ will-change:transform }
@@ -131,56 +133,42 @@ tailwind.config = {
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
         <span class="cart-badge hidden absolute -top-2 -end-2 bg-flame text-navy-950 text-[11px] font-black rounded-full min-w-[18px] h-[18px] grid place-items-center px-1">0</span>
       </span>
-      <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener" class="bg-flame text-navy-950 px-6 py-2.5 rounded-full font-bold hover:bg-flame-light transition">اطلب الآن</a>
+      <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener" class="bg-flame text-white px-6 py-2.5 rounded-full font-bold hover:bg-flame-light transition">اطلب الآن</a>
     </nav>
-    <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener" class="md:hidden bg-flame text-navy-950 px-5 py-2 rounded-full text-sm font-bold">اطلب</a>
+    <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener" class="md:hidden bg-flame text-white px-5 py-2 rounded-full text-sm font-bold">اطلب</a>
   </div>
 </header>
 
 <main id="top">
 
 <!-- ===== HERO ===== -->
-<section class="relative min-h-screen flex items-center pattern-bg overflow-hidden pt-28 pb-24">
-  <div class="absolute -top-24 -start-32 w-[40rem] h-[40rem] rounded-full bg-flame glow opacity-40" aria-hidden="true"></div>
-  <div class="absolute bottom-0 end-0 w-[32rem] h-[32rem] rounded-full bg-sky glow opacity-20" aria-hidden="true"></div>
-
-  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-[1.05fr_.95fr] gap-12 lg:gap-16 items-center w-full">
-    <div id="hero-copy">
-      <span class="inline-flex items-center gap-2 text-sky font-bold text-sm tracking-widest mb-6">
-        <span class="w-8 h-px bg-sky"></span> حي الزهراء · جدة
+<section class="relative min-h-screen flex items-center pattern-bg overflow-hidden pt-32 pb-24 photo-bg"
+         style="background-image:linear-gradient(100deg, rgba(23,17,99,.96) 0%, rgba(23,17,99,.86) 45%, rgba(23,17,99,.55) 100%), url('https://dabboos.sa/wp-content/uploads/2026/07/website-banner-1-e1784839566608.png')">
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 w-full">
+    <div class="max-w-2xl" id="hero-copy">
+      <span class="inline-flex items-center gap-2 text-flame font-bold text-sm tracking-widest mb-6">
+        <span class="w-8 h-px bg-flame"></span> حي الزهراء · جدة
       </span>
       <h1 class="font-display font-black leading-[1.05] text-[clamp(2.6rem,7.5vw,6rem)] mb-7">
         <span class="block">مقرمش غربي،</span>
         <span class="block text-flame">بنكهة عربية أصيلة</span>
       </h1>
-      <p class="text-white/65 text-lg max-w-xl mb-10 leading-relaxed">
+      <p class="text-white/75 text-lg max-w-xl mb-10 leading-relaxed">
         نحن ندمج المقرمش الغربي بصوصات عربية أصلية ما تلقاها بمكان ثاني.
       </p>
       <div class="flex flex-wrap items-center gap-4">
         <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener"
-           class="magnet inline-flex items-center gap-3 bg-flame text-navy-950 px-9 py-4 rounded-full font-display font-black text-lg shadow-[0_20px_50px_-12px_rgba(245,130,31,.6)]">
+           class="magnet inline-flex items-center gap-3 bg-flame text-white px-9 py-4 rounded-full font-display font-black text-lg shadow-[0_20px_50px_-12px_rgba(245,130,31,.65)]">
           اطلب الآن
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </a>
-        <a href="#menu" class="inline-flex items-center gap-2 border border-white/25 px-8 py-4 rounded-full font-bold hover:border-flame hover:text-flame transition">شوف المنيو</a>
+        <a href="#menu" class="inline-flex items-center gap-2 border border-white/35 px-8 py-4 rounded-full font-bold hover:border-flame hover:text-flame transition">شوف المنيو</a>
       </div>
-      <div class="flex flex-wrap gap-10 mt-14 pt-8 border-t border-white/10">
-        <div><div class="font-display font-black text-3xl text-sky">4.3</div><div class="text-white/50 text-sm">تقييم منصات التوصيل</div></div>
-        <div><div class="font-display font-black text-3xl text-sky">6.7K+</div><div class="text-white/50 text-sm">متابع إنستقرام</div></div>
-        <div><div class="font-display font-black text-3xl text-sky">٣ فجرًا</div><div class="text-white/50 text-sm">نشتغل لين</div></div>
+      <div class="flex flex-wrap gap-10 mt-14 pt-8 border-t border-white/15">
+        <div><div class="font-display font-black text-3xl text-flame">4.3</div><div class="text-white/60 text-sm">تقييم منصات التوصيل</div></div>
+        <div><div class="font-display font-black text-3xl text-flame">6.7K+</div><div class="text-white/60 text-sm">متابع إنستقرام</div></div>
+        <div><div class="font-display font-black text-3xl text-flame">٣ فجرًا</div><div class="text-white/60 text-sm">نشتغل لين</div></div>
       </div>
-    </div>
-
-    <div class="relative h-[24rem] sm:h-[32rem] lg:h-[38rem]" id="hero-stage" aria-hidden="true">
-      <figure class="float absolute top-[2%] start-[4%] w-[52%] max-w-[19rem] rotate-[-8deg] rounded-[1.75rem] overflow-hidden bg-white shadow-[0_35px_70px_-20px_rgba(0,0,0,.8)] ring-1 ring-white/20" data-depth="3" data-rot="-8">
-        <img src="https://dabboos.sa/wp-content/uploads/2026/07/13-660x740.png" alt="" width="660" height="740" class="w-full h-auto" decoding="async">
-      </figure>
-      <figure class="float absolute top-[30%] end-[0%] w-[46%] max-w-[16rem] rotate-[7deg] rounded-[1.5rem] overflow-hidden bg-white shadow-[0_35px_70px_-20px_rgba(0,0,0,.8)] ring-1 ring-white/20" data-depth="6" data-rot="7">
-        <img src="https://dabboos.sa/wp-content/uploads/2026/01/7-660x740.png" alt="" width="660" height="740" class="w-full h-auto" decoding="async" loading="lazy">
-      </figure>
-      <figure class="float absolute bottom-[0%] start-[18%] w-[42%] max-w-[14rem] rotate-[-4deg] rounded-[1.25rem] overflow-hidden bg-white shadow-[0_35px_70px_-20px_rgba(0,0,0,.8)] ring-1 ring-white/20" data-depth="9" data-rot="-4">
-        <img src="https://dabboos.sa/wp-content/uploads/2022/09/4-660x740.png" alt="" width="660" height="740" class="w-full h-auto" decoding="async" loading="lazy">
-      </figure>
     </div>
   </div>
 </section>
@@ -200,7 +188,8 @@ tailwind.config = {
 </section>
 
 <!-- ===== SAUCES ===== -->
-<section id="secret" class="relative py-28 sm:py-36 pattern-bg overflow-hidden">
+<section id="secret" class="relative py-28 sm:py-36 pattern-bg overflow-hidden photo-bg"
+         style="background-image:linear-gradient(rgba(23,17,99,.93), rgba(23,17,99,.97)), url('https://dabboos.sa/wp-content/uploads/2026/07/dabboos.sa_1776775719_3880197514691670783_73544301408-2.jpg')">
   <div class="max-w-7xl mx-auto px-5 sm:px-8">
     <div class="max-w-2xl mb-16" data-reveal>
       <span class="text-flame font-bold tracking-widest text-sm">السر</span>
@@ -749,7 +738,8 @@ tailwind.config = {
 </section>
 
 <!-- ===== BRANCH ===== -->
-<section id="branch" class="relative py-28 sm:py-36 pattern-bg overflow-hidden">
+<section id="branch" class="relative py-28 sm:py-36 pattern-bg overflow-hidden photo-bg"
+         style="background-image:linear-gradient(rgba(23,17,99,.90), rgba(23,17,99,.96)), url('https://dabboos.sa/wp-content/uploads/2026/03/ChIJK4C8NB7bwxURKACCoLUxtcE_a7e2599661ba85ee5fcbab5e26674a1e.jpg')">
   <div class="absolute top-1/3 start-1/4 w-96 h-96 rounded-full bg-flame glow opacity-20" aria-hidden="true"></div>
   <div class="relative max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div data-reveal>
@@ -758,7 +748,10 @@ tailwind.config = {
       <div class="space-y-6 text-lg">
         <div><div class="font-bold mb-1 text-flame">العنوان</div><p class="text-white/60">شارع أحمد العطاس، حي الزهراء، جدة</p></div>
         <div><div class="font-bold mb-1 text-flame">الدوام</div><p class="text-white/60">يومياً ١١ صباحاً – ٣ فجراً<br><span class="text-white/45 text-base">الجمعة من ١ ظهراً</span></p></div>
-        <div><div class="font-bold mb-1 text-flame">تواصل</div><a href="https://wa.me/966550238787" target="_blank" rel="noopener" class="text-sky hover:underline">واتساب: 550 238 787</a></div>
+        <div><div class="font-bold mb-1 text-flame">تواصل</div>
+          <a href="https://wa.me/966550238787" target="_blank" rel="noopener" class="text-white hover:text-flame underline underline-offset-4 transition">واتساب: 550 238 787</a>
+          <span class="text-white/30 mx-2">·</span>
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJK4C8NB7bwxURKACCoLUxtcE" target="_blank" rel="noopener" class="text-white hover:text-flame underline underline-offset-4 transition">افتح في خرائط قوقل</a></div>
       </div>
     </div>
     <div class="grid gap-4" data-reveal>
@@ -775,11 +768,12 @@ tailwind.config = {
 </section>
 
 <!-- ===== FINAL CTA ===== -->
-<section class="relative py-32 sm:py-44 bg-navy-950 pattern-bg overflow-hidden text-center">
+<section class="relative py-32 sm:py-44 pattern-bg overflow-hidden text-center photo-bg"
+         style="background-image:linear-gradient(rgba(23,17,99,.88), rgba(23,17,99,.94)), url('https://dabboos.sa/wp-content/uploads/2026/07/dabboos.sa_1777898310_3889614826188363044_73544301408.jpg')">
   <div class="relative max-w-4xl mx-auto px-5 sm:px-8">
     <h2 class="font-display font-black text-[clamp(3rem,11vw,8rem)] leading-none mb-10" data-reveal>جاهز <span class="text-flame">تطلب؟</span></h2>
     <a href="https://dabboos.tryorder.net/en/menu" target="_blank" rel="noopener"
-       class="magnet inline-flex items-center gap-4 bg-flame text-navy-950 px-12 sm:px-16 py-6 rounded-full font-display font-black text-2xl sm:text-3xl shadow-[0_25px_70px_-15px_rgba(245,130,31,.7)]">
+       class="magnet inline-flex items-center gap-4 bg-flame text-white px-12 sm:px-16 py-6 rounded-full font-display font-black text-2xl sm:text-3xl shadow-[0_25px_70px_-15px_rgba(245,130,31,.7)]">
       اطلب الآن
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     </a>
