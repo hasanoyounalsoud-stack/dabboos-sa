@@ -105,6 +105,9 @@ tailwind.config = {
   .cat-pill.active{ background:#F5821F; color:#171163; border-color:#F5821F }
   .no-scrollbar{ scrollbar-width:none; -ms-overflow-style:none }
   .no-scrollbar::-webkit-scrollbar{ display:none }
+  .review-card .stars{ font-size:1rem; letter-spacing:.15em; line-height:1; }
+  #rev-track{ scrollbar-width:none; }
+  #rev-track::-webkit-scrollbar{ display:none; }
   .magnet, .float{ will-change:transform }
   .fly-dot{ position:fixed; width:16px; height:16px; border-radius:9999px; background:#F5821F;
     box-shadow:0 0 22px rgba(245,130,31,.9); pointer-events:none; z-index:250 }
@@ -744,6 +747,101 @@ tailwind.config = {
 </section>
 
 <!-- ===== BRANCH ===== -->
+<!-- ===== REVIEWS ===== -->
+<section id="reviews" class="relative py-28 sm:py-36 bg-navy-900 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+      <div class="max-w-xl">
+        <span class="section-eyebrow">آراء زبائننا</span>
+        <h2 class="font-display font-black text-[clamp(1.9rem,4.5vw,3rem)] leading-tight mt-2">
+          موثّقة من خرائط قوقل
+        </h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" id="rev-prev" aria-label="المراجعة السابقة"
+                class="w-11 h-11 rounded-full border border-white/20 grid place-items-center text-white/70 hover:border-flame hover:text-flame transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button type="button" id="rev-next" aria-label="المراجعة التالية"
+                class="w-11 h-11 rounded-full border border-white/20 grid place-items-center text-white/70 hover:border-flame hover:text-flame transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="relative -mx-5 sm:mx-0">
+      <ul id="rev-track" class="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory px-5 sm:px-0 pb-2" role="list">
+
+        <li class="review-card snap-start flex-shrink-0 w-[85%] sm:w-[360px] bg-navy-800/50 border border-white/10 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-full bg-flame/15 text-flame font-display font-black grid place-items-center flex-shrink-0">أ</span>
+              <div>
+                <div class="font-bold text-sm">أحمد الحربي</div>
+                <div class="text-white/40 text-xs">قبل ٥ أشهر</div>
+              </div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" class="flex-shrink-0">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4c-7.5 0-14 4.1-17.7 10.7z"/>
+              <path fill="#4CAF50" d="M24 44c5.4 0 10.3-1.8 14.1-5.1l-6.5-5.5C29.6 35.1 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.8l-6.6 5.1C9.9 39.8 16.4 44 24 44z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.5C39.9 37.5 44 32.5 44 24c0-1.3-.1-2.7-.4-3.5z"/>
+            </svg>
+          </div>
+          <div class="stars text-flame mb-3" aria-hidden="true">★★★★★</div>
+          <p class="text-white/70 text-sm leading-relaxed">مكان نظيف وتجربة جميلة. اشكر الموظف احسان على تعامله الراقي مع الزبائن.</p>
+        </li>
+
+        <li class="review-card snap-start flex-shrink-0 w-[85%] sm:w-[360px] bg-navy-800/50 border border-white/10 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-full bg-flame/15 text-flame font-display font-black grid place-items-center flex-shrink-0">A</span>
+              <div>
+                <div class="font-bold text-sm">Ahmed Al-Harbi</div>
+                <div class="text-white/40 text-xs">5 months ago</div>
+              </div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" class="flex-shrink-0">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4c-7.5 0-14 4.1-17.7 10.7z"/>
+              <path fill="#4CAF50" d="M24 44c5.4 0 10.3-1.8 14.1-5.1l-6.5-5.5C29.6 35.1 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.8l-6.6 5.1C9.9 39.8 16.4 44 24 44z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.5C39.9 37.5 44 32.5 44 24c0-1.3-.1-2.7-.4-3.5z"/>
+            </svg>
+          </div>
+          <div class="stars text-flame mb-3" aria-hidden="true">★★★★★</div>
+          <p class="text-white/70 text-sm leading-relaxed" dir="ltr">A clean place and a pleasant experience. I thank the employee, Ihsan, for his excellent customer service.</p>
+        </li>
+
+        <li class="review-card snap-start flex-shrink-0 w-[85%] sm:w-[360px] bg-navy-800/50 border border-white/10 rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-full bg-flame/15 text-flame font-display font-black grid place-items-center flex-shrink-0">N</span>
+              <div>
+                <div class="font-bold text-sm">Nashwan Al-Gabbani</div>
+                <div class="text-white/40 text-xs">5 months ago</div>
+              </div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" class="flex-shrink-0">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.6 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4c-7.5 0-14 4.1-17.7 10.7z"/>
+              <path fill="#4CAF50" d="M24 44c5.4 0 10.3-1.8 14.1-5.1l-6.5-5.5C29.6 35.1 26.9 36 24 36c-5.3 0-9.7-3.1-11.3-7.8l-6.6 5.1C9.9 39.8 16.4 44 24 44z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.5C39.9 37.5 44 32.5 44 24c0-1.3-.1-2.7-.4-3.5z"/>
+            </svg>
+          </div>
+          <div class="stars text-flame mb-3" aria-hidden="true">★★★★★</div>
+          <p class="text-white/70 text-sm leading-relaxed" dir="ltr">Firstly, it was my first time trying them, and I ordered four strips to test them out. Honestly, they were good, the taste was great&hellip;</p>
+        </li>
+
+      </ul>
+    </div>
+
+    <p class="text-white/30 text-xs mt-6">
+      مراجعات موثّقة من خرائط قوقل — بعضها معروض جزئيًا حسب طول النص الأصلي.
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJK4C8NB7bwxURKACCoLUxtcE" target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-flame transition">شاهد كل المراجعات على خرائط قوقل ↗</a>
+    </p>
+  </div>
+</section>
+
 <section id="branch" class="relative py-28 sm:py-36 pattern-bg overflow-hidden photo-bg"
          style="background-image:linear-gradient(rgba(23,17,99,.88), rgba(23,17,99,.94)), url('https://dabboos.sa/wp-content/uploads/2026/07/dabboos.sa_1777898310_3889614826188363044_73544301408.jpg')">
   <div class="absolute top-1/3 start-1/4 w-96 h-96 rounded-full bg-flame glow opacity-20" aria-hidden="true"></div>
@@ -1056,6 +1154,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     setActive(heads[0].id.replace('cat-',''));
   }
+
+  /* ===== 10ب) سلايدر المراجعات — أزرار يمين/يسار تحترم RTL ===== */
+  (function () {
+    var track = document.getElementById('rev-track');
+    var prev  = document.getElementById('rev-prev');
+    var next  = document.getElementById('rev-next');
+    if (!track || !prev || !next) return;
+    function step(dir) {
+      var card = track.querySelector('.review-card');
+      var amount = card ? card.getBoundingClientRect().width + 20 : 340;
+      // في RTL: "التالي" يعني تحرّك للسالب على محور X المنطقي، فنعكس الاتجاه صراحة
+      var rtl = getComputedStyle(track).direction === 'rtl';
+      var delta = dir * amount * (rtl ? -1 : 1);
+      track.scrollBy({ left: delta, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    prev.addEventListener('click', function () { step(-1); });
+    next.addEventListener('click', function () { step(1); });
+  })();
 
   /* ===== 11) CART STATE ===== */
   var WA='966550238787';
